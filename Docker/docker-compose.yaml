@@ -1,0 +1,25 @@
+services:
+  meam-5170-env:
+    image: meam-517-env:latest
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - "DISPLAY"
+      - "QT_X11_NO_MITSHM=1" #fix some QT bugs
+    #share your user to the container in order to access your x11
+    user: 1000:1000 #adapt as needed!
+    ports:
+      - "8888:8888"
+      - "7000:7000"
+    volumes: 
+      #share your x11 socket and permissions to the container
+      - /usr/bin/x86_64-linux-gnu:/usr/bin/x86_64-linux-gnu
+      - /usr/share/X11/xorg.conf.d:/usr/share/X11/xorg.conf.d
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+      - /etc/shadow:/etc/shadow:ro
+      - /etc/sudoers:/etc/sudoers:ro
+      - /etc/sudoers.d:/etc/sudoers.d:ro
+      - /home/stephen:/home/stephen:rw
+    command: tail -f /dev/null
