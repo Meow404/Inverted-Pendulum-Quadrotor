@@ -8,6 +8,8 @@ services:
       - "QT_X11_NO_MITSHM=1" #fix some QT bugs
     #share your user to the container in order to access your x11
     user: 1000:1000 #adapt as needed!
+    expose:
+      - 8888
     ports:
       - "8888:8888"
       - "7000:7000"
