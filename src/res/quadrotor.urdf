@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!-- Mesh file and approximate numbers are from Abe Bachrach at Skydio.  -->
+<robot name="quadrotor">
+  <!--
+  Axes are standard vehicle coordinates:
+    +X - Pointing toward the nose (primary camera).
+    +Y - Towards the left rotors.
+    +Z - Towards the top of the vehicle..
+  Origin:
+    (0, 0, 0) in the center of the main quadrotor body.
+  -->
+  <link name="base_link">
+    <inertial>
+      <mass value="0.775"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0015" ixy="0.0" ixz="0.0" iyy="0.0025" iyz="0.0" izz="0.0035"/>
+    </inertial>
+    <visual>
+      <origin rpy="1.570796 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://drake_models/skydio_2/skydio_2_1000_poly.gltf" scale=".00254"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size=".36 .4 .06"/>
+      </geometry>
+    </collision>
+    </link>
+
+
+
+  <!-- <link name="world_base" /> -->
+  <!-- <link name="base_x" /> -->
+  <!-- <joint name="planar_x" type="prismatic"> -->
+  <!--   <parent link="world_base"/> -->
+  <!--   <child link="base_x"/> -->
+  <!--   <axis xyz="1 0 0"/> -->
+  <!--   </joint> -->
+  <!---->
+  <!--   <link name="base_xy"/> -->
+  <!--   <joint name="planar_y" type="prismatic"> -->
+  <!--     <parent link="base_x"/> -->
+  <!--     <child link="base_xy"/> -->
+  <!--     <axis xyz="0 1 0"/> -->
+  <!--   </joint> -->
+  <!---->
+  <!--   <link name="base_xyz"/> -->
+  <!--   <joint name="planar_z" type="prismatic"> -->
+  <!--     <parent link="base_xy"/> -->
+  <!--     <child link="base_xyz"/> -->
+  <!--     <axis xyz="0 0 1"/> -->
+  <!--   </joint> -->
+  <!---->
+  <!--   <drake:joint name="angular_base" type="ball"> -->
+  <!--     <parent link="base_xyz" /> -->
+  <!--     <child link="base_link" /> -->
+  <!--     <origin rpy="0 0 0" xyz="0 0 0" /> -->
+  <!--   </drake:joint> -->
+
+  <!--   <link name="base_xyz_r"/> -->
+  <!--   <joint name="planar_rotx" type="revolute"> -->
+  <!--     <parent link="base_xyz"/> -->
+  <!--     <child link="base_xyz_r"/> -->
+  <!--     <axis xyz="1 0 0"/> -->
+  <!--   </joint> -->
+  <!---->
+  <!--   <link name="base_xyz_rp"/> -->
+  <!--   <joint name="planar_roty" type="revolute"> -->
+  <!--     <parent link="base_xyz_r"/> -->
+  <!--     <child link="base_xyz_rp"/> -->
+  <!--     <axis xyz="0 1 0"/> -->
+  <!--   </joint> -->
+  <!---->
+  <!--   <joint name="planar_rotz" type="revolute"> -->
+  <!--     <parent link="base_xyz_rp"/> -->
+  <!--     <child link="base_link"/> -->
+  <!--     <axis xyz="0 0 1"/> -->
+  <!--   </joint> -->
+  <!---->
+  <!--   <transmission name="planar_x_trans" type="SimpleTransmission"> -->
+  <!--   <actuator name="right_hip_torque"/> -->
+  <!--   <joint name="planar_x"/> -->
+  <!--   <mechanicalReduction>1</mechanicalReduction> -->
+  <!--   </transmission> -->
+  <!--   <transmission name="right_hip_trans" type="SimpleTransmission"> -->
+  <!--   <actuator name="right_hip_torque"/> -->
+  <!--   <joint name="right_hip_pin"/> -->
+  <!--   <mechanicalReduction>1</mechanicalReduction> -->
+  <!--   </transmission> -->
+  <!--   <transmission name="right_hip_trans" type="SimpleTransmission"> -->
+  <!--   <actuator name="right_hip_torque"/> -->
+  <!--   <joint name="right_hip_pin"/> -->
+  <!--   <mechanicalReduction>1</mechanicalReduction> -->
+  <!--   </transmission> -->
+  <!--   <transmission name="right_hip_trans" type="SimpleTransmission"> -->
+  <!--   <actuator name="right_hip_torque"/> -->
+  <!--   <joint name="right_hip_pin"/> -->
+  <!--   <mechanicalReduction>1</mechanicalReduction> -->
+  <!--   </transmission> -->
+  <!--   <transmission name="right_hip_trans" type="SimpleTransmission"> -->
+  <!--   <actuator name="right_hip_torque"/> -->
+  <!--   <joint name="right_hip_pin"/> -->
+  <!--   <mechanicalReduction>1</mechanicalReduction> -->
+  <!--   </transmission> -->
+  <!--   <transmission name="right_hip_trans" type="SimpleTransmission"> -->
+  <!--   <actuator name="right_hip_torque"/> -->
+  <!--   <joint name="right_hip_pin"/> -->
+  <!--   <mechanicalReduction>1</mechanicalReduction> -->
+  <!-- </transmission> -->
+</robot>

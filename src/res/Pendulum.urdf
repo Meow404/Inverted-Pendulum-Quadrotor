@@ -56,12 +56,17 @@
       </geometry>
     </collision>
   </link>
-  <joint name="theta" type="continuous">
-    <parent link="base"/>
-    <child link="arm"/>
-    <axis xyz="1 1 0"/>
-    <dynamics damping="0.1"/>
-  </joint>
+  <!-- <joint name="theta" type="continuous"> -->
+  <!--   <parent link="base"/> -->
+  <!--   <child link="arm"/> -->
+  <!--   <axis xyz="1 1 0"/> -->
+  <!--   <dynamics damping="0.1"/> -->
+  <!--   </joint> -->
+  <drake:joint name="ball_joint" type="ball">
+    <parent link="base" />
+    <child link="arm" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+  </drake:joint>
   <link name="arm_com">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 -0.5"/>
@@ -86,11 +91,11 @@
     <parent link="arm"/>
     <child link="arm_com"/>
   </joint>
-  <transmission name="elbow_trans" type="SimpleTransmission">
-    <actuator name="tau"/>
-    <joint name="theta"/>
-    <mechanicalReduction>1</mechanicalReduction>
-  </transmission>
+  <!-- <transmission name="elbow_trans" type="SimpleTransmission"> -->
+  <!--   <actuator name="tau"/> -->
+  <!--   <joint name="theta"/> -->
+  <!--   <mechanicalReduction>1</mechanicalReduction> -->
+  <!-- </transmission> -->
   <gazebo reference="base">
     <material>Gazebo/Green</material>
   </gazebo>
