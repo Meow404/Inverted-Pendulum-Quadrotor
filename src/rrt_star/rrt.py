@@ -1,10 +1,8 @@
 import numpy as np
 import random
-from detectCollision import detectCollisionOnce
-from loadmap import loadmap
+from .detectCollision import detectCollisionOnce
+from .loadmap import loadmap
 from copy import deepcopy
-#from lib.calculateFK import FK 
-from tqdm import tqdm 
 from time import perf_counter 
     
 
@@ -16,12 +14,12 @@ def inflate_box(box, padding):
     :return: Inflated box [xmin, ymin, zmin, xmax, ymax, zmax].
     """
     return [
-        box[0] - padding,  # xmin
-        box[1] - padding,  # ymin
-        box[2] - padding,  # zmin
-        box[3] + padding,  # xmax
-        box[4] + padding,  # ymax
-        box[5] + padding   # zmax
+        box[0] - padding[0],  # xmin
+        box[1] - padding[1],  # ymin
+        box[2] - padding[2],  # zmin
+        box[3] + padding[3],  # xmax
+        box[4] + padding[4],  # ymax
+        box[5] + padding[5]   # zmax
     ]
 
 def isRobotCollided(start, end, map_struct, padding=1.3):
@@ -45,7 +43,7 @@ def isRobotCollided(start, end, map_struct, padding=1.3):
 
     for box in map_struct.obstacles:
         # Inflate the box with the given padding
-        inflated_box = inflate_box(box, padding)
+        inflated_box = inflate_box(box, [0.2, 0.2, 1.0, 0.2, 0.2, 1.0])
         
         # Check for collision between the single 3D point `q_points` and the inflated box
         if detectCollisionOnce(initial_pos, random_pos, inflated_box):  # Using q_points as both start and end to form a "line"
@@ -162,6 +160,7 @@ def rrt(map_struct, start, goal):
 
 
     if not is_path_colliding(start, goal, map_struct):
+        print("start and goall are inside obstacle")
         return [start, goal]
 
     
@@ -179,14 +178,10 @@ def rrt(map_struct, start, goal):
 
         #Getting a random point with a 10% probability of bias towards goal direction
         if random.random()>0.1:
-
-            random_x = random.uniform(-10, 10)
-            random_y = random.uniform(-10, 10)
-            random_z = random.uniform(-10, 10)
-            sample = np.array([random_x, random_y, random_z])
-        
+            mean = last_config + (goal - last_config)/np.linalg.norm(goal - last_config)
+            sample = np.random.normal(mean, np.ones(3))
+            
         else:
-
             sample = goal
         
         # Find nearest node in tree to sample
