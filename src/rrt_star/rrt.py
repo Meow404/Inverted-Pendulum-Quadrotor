@@ -189,7 +189,7 @@ def rrt(map_struct, start, goal):
         nearest_node_config = tree[nearest_index]["config"]
         
         # Steer towards sample
-        new_config = steer(nearest_node_config, sample, 0.1)
+        new_config = steer(nearest_node_config, sample, 0.05)
         
         # Check if new config is in collision
         if not isRobotCollided(new_config, nearest_node_config, map_struct):
